@@ -1,5 +1,8 @@
 package com.lambdaschool.zoos.views;
 
-public class CountAnimalsinZoos {
+public interface CountAnimalsinZoos {
 
+        long getZooId();
+        String getZooName();
+        int getCountanimals();
 }

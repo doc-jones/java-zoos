@@ -1,9 +1,10 @@
 package com.lambdaschool.zoos.repos;
 
 import com.lambdaschool.zoos.models.Zoo;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.web.servlet.tags.form.SelectTag;
+
 
 import java.util.ArrayList;
 
@@ -23,7 +24,17 @@ public interface ZooRespository extends CrudRepository<Zoo, Long> {
 //    FROM zooanimals
 //    WHERE animals = :animalid", nativeQuery = true)
 
+    @Modifying
     @Query(value = "DELETE FROM zooanimals WHERE animals = :animalid, nativeQuery = true")
-    void  
+    void  deleteCountAnimalsInZoos();
 
+
+
+//    ManyToMany between zoos and animals
+
+//    OneToMany between zoos and telephone
+
+//    Put and post zoo and animal combination don't get executed in normal way - connect a zoo and an animal
+
+//     localhost:2019/h2-console
 }
