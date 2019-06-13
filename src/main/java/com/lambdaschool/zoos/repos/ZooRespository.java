@@ -1,22 +1,29 @@
 package com.lambdaschool.zoos.repos;
 
 import com.lambdaschool.zoos.models.Zoo;
-import com.lambdaschool.zoos.views.CountAnimalsinZoos;
+import com.lambdaschool.zoos.views.JustTheCount;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+public interface ZooRepository extends CrudRepository<Zoo, Long>
+{
+    Zoo findByZooname(String name);
 
-import java.util.ArrayList;
+    @Modifying
+    @Query(value = "DELETE FROM zooanimals WHERE zooid = :zooid", nativeQuery = true)
+    void deleteZooFromZooAnimals(long zooid);
 
-import static org.hibernate.FetchMode.JOIN;
+    @Modifying
+    @Query(value = "DELETE FROM zooanimals WHERE zooid = :zooid AND animalid = :animalid", nativeQuery = true)
+    void deleteZooAnimalCombo(long zooid, long animalid);
 
-public interface ZooRespository extends CrudRepository<Zoo, Long> {
+    @Query(value = "SELECT COUNT(*) as count FROM zooanimals WHERE zooid = :zooid AND animalid = :animalid", nativeQuery = true)
+    JustTheCount checkZooAnimalCombo(long zooid, long animalid);
 
 
-
-
-//    Put and post zoo and animal combination don't get executed in normal way - connect a zoo and an animal
-
-//     localhost:2019/h2-console
+    @Modifying
+    @Query(value = "INSERT INTO zooanimals (zooid, animalid) VALUES (:zooid, :animalid)", nativeQuery = true)
+    void saveZooAnimalCombo(long zooid, long animalid);
+}
 }

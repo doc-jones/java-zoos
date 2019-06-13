@@ -2,29 +2,16 @@ package com.lambdaschool.zoos.repos;
 
 import com.lambdaschool.zoos.models.Animal;
 import com.lambdaschool.zoos.views.CountAnimalsinZoos;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 
-public interface AnimalRespository extends CrudRepository<Animal, Long > {
+public interface AnimalRepository extends CrudRepository<Animal, Long>
+{
+    Animal findByAnimaltype(String type);
 
-//    SELECT z.animalid, animaltype, count(z.zooid) as countanimals
-//    FROM zooanimals z
-//    INNER JOIN a.animalid
-//    ON z.animalid = a.animalid
-//    GROUP BY z.animalid, a.animaltype
-
-    @Query(value = "SELECT z.animalid, a.animaltype, count(a.animalid) as countanimals FROM zooanimals z INNER JOIN animal a ON z.animalid = a animalid GROUP BY z.animalid, a.animaltype", nativeQuery = true)
+    @Query(value = "SELECT a.animalid, a.animaltype, count(z.zooid) as countzoos FROM zooanimals z INNER JOIN animal a ON z.animalid=a.animalid GROUP BY a.animalid, a.animaltype ORDER BY a.animaltype, a.animalid",
+            nativeQuery = true)
     ArrayList<CountAnimalsinZoos> getCountAnimalsInZoos();
-
-    //    "DELETE
-//    FROM zooanimals
-//    WHERE animalid = :animalid", nativeQuery = true)
-
-    @Modifying
-    @Query(value = "DELETE FROM zooanimals WHERE animalid = :animalid", nativeQuery = true)
-    void  deleteCountAnimalsFromZooanimals(long animalid);
-
 }

@@ -1,62 +1,80 @@
 package com.lambdaschool.zoos.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "telephone")
-public class Telephone {
-
+public class Telephone
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long telephoneid;
+    private long phoneid;
 
-    private String telephonetype;
-    private String telephonenumber;
-
+    private String phonetype;
+    private String phonenumber;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "zooid")
+    @JsonIgnoreProperties("telephones")
     private Zoo zoo;
 
-    public Telephone() {
+    public Telephone()
+    {
     }
 
-    public Telephone(String telephonenumber) {
-        this.telephonenumber = telephonenumber;
+    public Telephone(String phonetype, String phonenumber, Zoo zoo)
+    {
+        this.phonetype = phonetype;
+        this.phonenumber = phonenumber;
+        this.zoo = zoo;
     }
 
-    public long getTelephoneid() {
-        return telephoneid;
+    public long getPhoneid()
+    {
+        return phoneid;
     }
 
-    public void setTelephoneid(long telephoneid) {
-        this.telephoneid = telephoneid;
+    public void setPhoneid(long phoneid)
+    {
+        this.phoneid = phoneid;
     }
 
-    public String getTelephonetype() {
-        return telephonetype;
+    public String getPhonetype()
+    {
+        return phonetype;
     }
 
-    public void setTelephonetype(String telephonetype) {
-        this.telephonetype = telephonetype;
+    public void setPhonetype(String phonetype)
+    {
+        this.phonetype = phonetype;
     }
 
-    public String getTelephonenumber() {
-        return telephonenumber;
+    public String getPhonenumber()
+    {
+        return phonenumber;
     }
 
-    public void setTelephonenumber(String telephonenumber) {
-        this.telephonenumber = telephonenumber;
+    public void setPhonenumber(String phonenumber)
+    {
+        this.phonenumber = phonenumber;
     }
 
-    public Zoo getZoo() {
+    public Zoo getZoo()
+    {
         return zoo;
     }
 
-    public void setZoo(Zoo zoo) {
+    public void setZoo(Zoo zoo)
+    {
         this.zoo = zoo;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Telephone{" + "phoneid=" + phoneid + ", phonetype='" + phonetype + '\'' + ", phonenumber='" + phonenumber + '\'' + ", zoo=" + zoo + '}';
+    }
 }
+

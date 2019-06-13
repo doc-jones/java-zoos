@@ -5,11 +5,11 @@ import com.lambdaschool.zoos.views.CountAnimalsinZoos;
 
 import java.util.ArrayList;
 
-public interface AnimalService {
-
+public interface AnimalService
+{
     ArrayList<Animal> findAll();
 
-    void delete(long id);
+    Animal findAnimalByType(String type);
 
     ArrayList<CountAnimalsinZoos> getCountAnimalsInZoos();
 }
