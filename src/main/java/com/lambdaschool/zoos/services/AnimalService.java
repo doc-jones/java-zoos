@@ -1,12 +1,15 @@
 package com.lambdaschool.zoos.services;
 
-import com.lambdaschool.zoos.models.Zoo;
+import com.lambdaschool.zoos.models.Animal;
+import com.lambdaschool.zoos.views.CountAnimalsinZoos;
 
 import java.util.ArrayList;
 
 public interface AnimalService {
 
-    ArrayList<Zoo> findAll();
+    ArrayList<Animal> findAll();
 
     void delete(long id);
+
+    ArrayList<CountAnimalsinZoos> getCountAnimalsInZoos();
 }

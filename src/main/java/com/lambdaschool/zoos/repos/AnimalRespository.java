@@ -21,10 +21,10 @@ public interface AnimalRespository extends CrudRepository<Animal, Long > {
 
     //    "DELETE
 //    FROM zooanimals
-//    WHERE animals = :animalid", nativeQuery = true)
+//    WHERE animalid = :animalid", nativeQuery = true)
 
     @Modifying
-    @Query(value = "DELETE FROM zooanimals WHERE animals = :animalid", nativeQuery = true)
-    void  deleteCountAnimalsInZoos();
+    @Query(value = "DELETE FROM zooanimals WHERE animalid = :animalid", nativeQuery = true)
+    void  deleteCountAnimalsFromZooanimals(long animalid);
 
 }
