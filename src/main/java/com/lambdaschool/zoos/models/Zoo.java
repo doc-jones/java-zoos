@@ -15,15 +15,21 @@ public class Zoo {
 
     private String zooname;
 
-    @OneToMany(mappedBy = "zoo")
-    private List<Animal> animals = new ArrayList<>();
 
-    @JoinTable(name = "zooanimals",
-            joinColumns = {@JoinColumn(name = "zooid")},
-            inverseJoinColumns = {@JoinColumn(name = "animalid")})
-    private List<Animal> animalss = new ArrayList<>();
+    @OneToMany(mappedBy = "zoo")
+    private List<Telephone> telephones = new ArrayList<>();
+
 
     public Zoo() {
+    }
+
+    public Zoo(String zooname) {
+        this.zooname = zooname;
+    }
+
+    public Zoo(String zooname, List<Telephone> telephones) {
+        this.zooname = zooname;
+        this.telephones = telephones;
     }
 
     public long getZooid() {
@@ -42,12 +48,12 @@ public class Zoo {
         this.zooname = zooname;
     }
 
-    public List<Animal> getAnimals() {
-        return animals;
+    public List<Telephone> getTelephones() {
+        return telephones;
     }
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
+    public void setTelephones(List<Telephone> telephones) {
+        this.telephones = telephones;
     }
 }
 

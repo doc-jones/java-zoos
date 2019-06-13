@@ -15,18 +15,23 @@ public class Animal {
 
     private String animaltype;
 
-    @ManyToOne
-    @JoinColumn(name = "zooid")
-    private Zoo zoo;
-
-    @ManyToMany(mappedBy = "zoos")
+    @ManyToMany
+    @JoinTable(name = "zooanimals",
+                joinColumns = {@JoinColumn(name = "animalid")},
+                inverseJoinColumns = {@JoinColumn(name = "zooid")})
     private List<Zoo> zoos = new ArrayList<>();
+
 
     public Animal() {
     }
 
     public Animal(String animaltype) {
         this.animaltype = animaltype;
+    }
+
+    public Animal(String animaltype, List<Zoo> zoos) {
+        this.animaltype = animaltype;
+        this.zoos = zoos;
     }
 
     public long getAnimalid() {
@@ -43,14 +48,6 @@ public class Animal {
 
     public void setAnimaltype(String animaltype) {
         this.animaltype = animaltype;
-    }
-
-    public Zoo getZoo() {
-        return zoo;
-    }
-
-    public void setZoo(Zoo zoo) {
-        this.zoo = zoo;
     }
 
     public List<Zoo> getZoos() {

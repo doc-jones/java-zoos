@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 
+import static org.hibernate.FetchMode.JOIN;
+
 public interface ZooRespository extends CrudRepository<Zoo, Long> {
 
 //    SELECT z.animalid, animaltype, count(z.zooid) as countanimals
@@ -16,7 +18,7 @@ public interface ZooRespository extends CrudRepository<Zoo, Long> {
 //    ON z.animalid = a.animalid
 //    GROUP BY z.animalid, a.animaltype
 
-    @Query(value = "SELECT z.animalid, animaltype, count(z.zooid) as countanimals" FROM zooanimals z INNER JOIN a.animalid ON z.animalid = a.animalid GROUP BY z.animalid, a.animaltype, nativeQuery = true)
+    @Query(value = "SELECT z.animalid, animaltype, count(z.zooid) as countanimals", FROM zooanimals z, INNER JOIN a.animalid, ON z.animalid = a.animalid, GROUP BY z.animalid, a.animaltype, nativeQuery = true")
     ArrayList<CountAnimalsInZoos> getCountAnimalsInZoos();
 
 
