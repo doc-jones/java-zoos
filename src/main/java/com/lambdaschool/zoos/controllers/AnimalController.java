@@ -1,30 +1,44 @@
 package com.lambdaschool.zoos.controllers;
 
 
+import com.lambdaschool.zoos.models.Animal;
 import com.lambdaschool.zoos.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AnimalController {
-
+@RequestMapping(value = "/animals")
+public class AnimalController
+{
     @Autowired
     private AnimalService animalService;
 
-    @GetMapping(value = "/animalcount", produces = {"application/json"})
-    public ResponseEntity<?> getCountAnimalsInZoos() {
+    @GetMapping(value = "/animals",
+            produces = {"application/json"})
+    public ResponseEntity<?> listAllAnimals()
+    {
+        return new ResponseEntity<>(animalService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{type}",
+            produces = {"application/json"})
+    public ResponseEntity<?> findAnimalByType(
+            @PathVariable
+                    String type)
+    {
+        Animal a = animalService.findAnimalByType(type);
+        return new ResponseEntity<>(a, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/count", produces = {"application/json"})
+    public ResponseEntity<?> getNumZoosAnimalsIn()
+    {
         return new ResponseEntity<>(animalService.getCountAnimalsInZoos(), HttpStatus.OK);
     }
-
-    @DeleteMapping("/delete/{animalid}")
-    public ResponseEntity<?> deleteAnimalById(@PathVariable long animalid) {
-
-        animalService.delete(animalid);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }
+

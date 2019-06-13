@@ -26,4 +26,3 @@ public interface ZooRepository extends CrudRepository<Zoo, Long>
     @Query(value = "INSERT INTO zooanimals (zooid, animalid) VALUES (:zooid, :animalid)", nativeQuery = true)
     void saveZooAnimalCombo(long zooid, long animalid);
 }
-}

@@ -1,7 +1,7 @@
 package com.lambdaschool.zoos.services;
 
 import com.lambdaschool.zoos.models.Animal;
-import com.lambdaschool.zoos.views.CountAnimalsinZoos;
+import com.lambdaschool.zoos.views.CountAnimalsInZoos;
 
 import java.util.ArrayList;
 
@@ -11,5 +11,5 @@ public interface AnimalService
 
     Animal findAnimalByType(String type);
 
-    ArrayList<CountAnimalsinZoos> getCountAnimalsInZoos();
+    ArrayList<CountAnimalsInZoos> getCountAnimalsInZoos();
 }
